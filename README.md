@@ -34,13 +34,13 @@ Dictionary<string, double> variables = new Dictionary<string, double>();
 variables.Add("var1", 2.5);
 variables.Add("var2", 3.4);
 
-CalculationEngine engine = new CalculationEngine();
+var engine = CalculationEngine.New<double>();
 double result = engine.Calculate("var1*var2", variables);
 ```
 
 To build a .NET Func accepting a dictionary as input containing the values for each variable:
 ```csharp
-CalculationEngine engine = new CalculationEngine();
+var engine = CalculationEngine.New<double>()
 Func<Dictionary<string, double>, double> formula = engine.Build("var1+2/(3*otherVariable)");
 
 Dictionary<string, double> variables = new Dictionary<string, double>();
@@ -52,7 +52,7 @@ double result = formula(variables);
 
 To build a typed .NET Func:
 ```csharp
-CalculationEngine engine = new CalculationEngine();
+var engine = CalculationEngine.New<double>()
 Func<int, double, double> formula = (Func<int, double, double>)engine.Formula("var1+2/(3*otherVariable)")
 	.Parameter("var1", DataType.Integer)
     .Parameter("otherVariable", DataType.FloatingPoint)
@@ -69,7 +69,7 @@ Dictionary<string, double> variables = new Dictionary<string, double>();
 variables.Add("var1", 2.5);
 variables.Add("var2", 3.4);
 
-CalculationEngine engine = new CalculationEngine();
+var engine = CalculationEngine.New<double>()
 double result = engine.Calculate("logn(var1,var2)+4", variables);
 ```
 
