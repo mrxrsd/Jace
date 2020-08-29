@@ -324,6 +324,24 @@ namespace Jace.Tests
         }
 
         [TestMethod]
+        public void TestUnaryMinus6Compiled()
+        {
+            var engine = CreateEngineHelper<decimal>(CultureInfo.InvariantCulture, ExecutionMode.Compiled, true, false, true);
+            decimal result = engine.Calculate("-(1*2)^2");
+
+            Assert.AreEqual(-4.0m, result);
+        }
+
+        [TestMethod]
+        public void TestUnaryMinus6Interpreted()
+        {
+            var engine = CreateEngineHelper<decimal>(CultureInfo.InvariantCulture, ExecutionMode.Interpreted, true, false, true);
+            decimal result = engine.Calculate("-(1*2)^2");
+
+            Assert.AreEqual(-4.0m, result);
+        }
+
+        [TestMethod]
         public void TestBuild()
         {
             var engine = CreateEngineHelper<decimal>();

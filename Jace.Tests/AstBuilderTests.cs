@@ -278,7 +278,7 @@ namespace Jace.Tests
         }
 
         [TestMethod]
-        public void TestUnaryMinus()
+        public void TestUnaryMinus1()
         {
             var registry = new MockFunctionRegistry<double>();
 
@@ -302,6 +302,28 @@ namespace Jace.Tests
             Addition addition = (Addition)unaryMinus.Argument;
             Assert.AreEqual(new IntegerConstant(5), addition.Argument1);
             Assert.AreEqual(new IntegerConstant(42), addition.Argument2);
+        }
+
+        [TestMethod]
+        public void TestUnaryMinus2()
+        {
+            var registry = new MockFunctionRegistry<double>();
+
+            var builder = new AstBuilder<double>(registry, false);
+            Operation operation = builder.Build(new List<Token>() {
+                new Token() { Value = '_', TokenType = TokenType.Operation },
+                new Token() { Value = '(', TokenType = TokenType.LeftBracket },
+                new Token() { Value = 1, TokenType = TokenType.Integer },
+                new Token() { Value = ')', TokenType = TokenType.RightBracket },
+                new Token() { Value = '^', TokenType = TokenType.Operation },
+                new Token() { Value = 2, TokenType = TokenType.Integer },
+            });
+
+            UnaryMinus unaryMinus = (UnaryMinus)operation;
+
+            Exponentiation exponentiation = (Exponentiation)unaryMinus.Argument;
+            Assert.AreEqual(new IntegerConstant(1), exponentiation.Base);
+            Assert.AreEqual(new IntegerConstant(2), exponentiation.Exponent);
         }
 
         [TestMethod]
