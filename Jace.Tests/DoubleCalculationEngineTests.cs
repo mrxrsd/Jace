@@ -1298,5 +1298,25 @@ namespace Jace.Tests
 
             Assert.AreEqual(3, result);
         }
+
+
+        [TestMethod]
+        public void TestDolarSymbolnterpreted()
+        {
+            var engine = CreateEngineHelper<double>(CultureInfo.InvariantCulture, ExecutionMode.Interpreted, true, false, true);
+            double result = engine.Calculate("$a + $b", new Dictionary<string, double> { {"$a", 2}, { "$b", 3 } });
+
+            Assert.AreEqual(5, result);
+        }
+
+
+        [TestMethod]
+        public void TestDolarSymbolCompiled()
+        {
+            var engine = CreateEngineHelper<double>(CultureInfo.InvariantCulture, ExecutionMode.Compiled, true, false, true);
+            double result = engine.Calculate("$a + $b", new Dictionary<string, double> { { "$a", 2 }, { "$b", 3 } });
+
+            Assert.AreEqual(5, result);
+        }
     }
 }

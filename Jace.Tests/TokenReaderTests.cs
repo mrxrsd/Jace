@@ -462,7 +462,7 @@ namespace Jace.Tests
             AssertExtensions.ThrowsException<ParseException>(() =>
             {
                 var reader = new TokenReader<double>(CultureInfo.InvariantCulture, DoubleNumericalOperations.Instance);
-                List<Token> tokens = reader.Read("$1+$2+$3");
+                List<Token> tokens = reader.Read("@1+@2+@3");
             });
         }
 
