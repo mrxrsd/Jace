@@ -613,5 +613,44 @@ namespace Jace.Tests
             Assert.AreEqual(1, tokens[5].Length);
         }
 
+        [TestMethod]
+        public void TestTokenReader28()
+        {
+            AssertExtensions.ThrowsException<ParseException>(() =>
+            {
+                var reader = new TokenReader<double>(CultureInfo.InvariantCulture, DoubleNumericalOperations.Instance);
+                List<Token> tokens = reader.Read(".");
+            });
+        }
+
+        [TestMethod]
+        public void TestTokenReader29()
+        {
+            AssertExtensions.ThrowsException<ParseException>(() =>
+            {
+                var reader = new TokenReader<double>(CultureInfo.InvariantCulture, DoubleNumericalOperations.Instance);
+                List<Token> tokens = reader.Read("..");
+            });
+        }
+
+        [TestMethod]
+        public void TestTokenReader30()
+        {
+            AssertExtensions.ThrowsException<ParseException>(() =>
+            {
+                var reader = new TokenReader<double>(CultureInfo.InvariantCulture, DoubleNumericalOperations.Instance);
+                List<Token> tokens = reader.Read("..1");
+            });
+        }
+
+        [TestMethod]
+        public void TestTokenReader31()
+        {
+            AssertExtensions.ThrowsException<ParseException>(() =>
+            {
+                var reader = new TokenReader<double>(CultureInfo.InvariantCulture, DoubleNumericalOperations.Instance);
+                List<Token> tokens = reader.Read("0..1");
+            });
+        }
     }
 }

@@ -91,19 +91,24 @@ namespace Jace.Tokenizer
                     }
                     else
                     {
+
                         T floatingVal; ;
-                        if (numericalOperations.TryParseFloatingPoint(buffer.ToString(), cultureInfo, out floatingVal))
+
+                        if (buffer.ToString() == "-")
+                        {
+                            // Verify if we have a unary minus, we use the token '_' for a unary minus in the AST builder
+                            tokens.Add(new Token() { TokenType = TokenType.Operation, Value = '_', StartPosition = startPosition, Length = 1 });
+                        }
+                        else if (numericalOperations.TryParseFloatingPoint(buffer.ToString(), cultureInfo, out floatingVal))
                         {
                             tokens.Add(new Token() { TokenType = TokenType.FloatingPoint, Value = floatingVal, StartPosition = startPosition, Length = i - startPosition });
                             isScientific = false;
                             isFormulaSubPart = false;
                         }
-                        else if (buffer.ToString() == "-")
+                        else 
                         {
-                            // Verify if we have a unary minus, we use the token '_' for a unary minus in the AST builder
-                            tokens.Add(new Token() { TokenType = TokenType.Operation, Value = '_', StartPosition = startPosition, Length = 1 });
+                            throw new ParseException(string.Format("Invalid floating point number: {0}", buffer.ToString()));
                         }
-                        // Else we skip
                     }
 
                     if (i == characters.Length)
