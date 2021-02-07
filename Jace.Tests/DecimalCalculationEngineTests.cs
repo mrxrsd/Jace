@@ -589,6 +589,32 @@ namespace Jace.Tests
         }
 
         [TestMethod]
+        public void TestConstantBuildCompiled()
+        {
+            var engine = CreateEngineHelper<decimal>(CultureInfo.InvariantCulture, ExecutionMode.Compiled);
+            Func<Dictionary<string, decimal>, decimal> formula = engine.Build("pi");
+
+            var variables = new Dictionary<string, decimal>();
+
+            decimal result = formula(variables);
+
+            Assert.AreEqual((decimal) Math.PI , result);
+        }
+
+        [TestMethod]
+        public void TestConstantBuildInterpreted()
+        {
+            var engine = CreateEngineHelper<decimal>(CultureInfo.InvariantCulture, ExecutionMode.Interpreted);
+            Func<Dictionary<string, decimal>, decimal> formula = engine.Build("pi");
+
+            Dictionary<string, decimal> variables = new Dictionary<string, decimal>();
+
+            decimal result = formula(variables);
+
+            Assert.AreEqual((decimal)Math.PI, result);
+        }
+
+        [TestMethod]
         public void TestVariableCaseFuncCompiled()
         {
             var engine = CreateEngineHelper<decimal>(CultureInfo.InvariantCulture, ExecutionMode.Compiled);
