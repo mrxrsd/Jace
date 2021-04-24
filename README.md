@@ -1,3 +1,11 @@
+# Disclaimer:
+
+This is my fork of Jace. It is basically the same as the original project but here we have decimal support and I've applied some bug fixes there are not in jace's main branch.
+
+Original Project: [Jace](https://github.com/pieterderycke/Jace)
+
+---
+
 # Jace.NET
 Jace.NET is a high performance calculation engine for the .NET platform. It stands for "Just Another Calculation Engine".
 
